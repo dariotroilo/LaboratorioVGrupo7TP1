@@ -2,17 +2,19 @@ package dominio;
 
 import java.util.Arrays;
 
-public class EntradaRecital extends Entrada {
+public class EntradaRecital extends Entrada implements ICosto {
 	private final double valorEntradaVip = 1500;
-	private final double valorEntradaGeneral = 850;
+	private final double valorEntradaGeneral = 800;
+	private char tipo;
 	
 	private String banda;
 	private String bandasSoporte[];
 	private String genero;
 	
-	public EntradaRecital(String banda,String[] bandasSoporte, String genero, Fecha fecha, int duracion) {
-		super("Entrada recital para " + banda, fecha, 4, 0);
+	public EntradaRecital(String banda,String[] bandasSoporte, String genero, Fecha fecha, int duracion, char Tipo) {
+		super("Entrada recital para " + banda, fecha, 4);
 		this.banda = banda;
+		this.tipo = Tipo;
 		
 		if (validaBandasSoporte(bandasSoporte)) {
 			setBandasSoporte(bandasSoporte);
@@ -95,5 +97,16 @@ public class EntradaRecital extends Entrada {
 	public String getInfoEntrada() {
 		return super.toString() + ", " + this.toString();
 	}
-	
+
+	@Override
+	public double devolverCosto(double dato) {
+		if(tipo=='G') { // General
+			return valorEntradaGeneral;	
+		}
+		else { // VIP
+			return valorEntradaVip;
+		}
+
+	}
+
 }

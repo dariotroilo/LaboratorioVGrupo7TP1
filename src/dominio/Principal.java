@@ -6,7 +6,7 @@ public class Principal extends Fecha {
 		Fecha fecha = new Fecha(01, 03, 2021);
 		
 		String[] bandas = {"pescado rabioso", "banda 2"};
-		EntradaRecital entradaRecital = new EntradaRecital("pearl jam", bandas, "rock", fecha, 2);
+		EntradaRecital entradaRecital = new EntradaRecital("pearl jam", bandas, "rock", fecha, 1, 'G');
 		entradaRecital.compraEntradas(2, 3);
 		System.out.println(entradaRecital.getInfoEntrada());
 		

@@ -23,13 +23,12 @@ public abstract class Entrada {
 	}
 	
    //constructor con parámetros
-	public Entrada(String nombre, Fecha fecha, int duracion, double d ) {
+	public Entrada(String nombre, Fecha fecha, int duracion ) {
 		cont++;
 		id = cont;
 		this.nombre = nombre;
 		this.fecha = fecha;
 		this.duracion = duracion;
-		this.costo = d;
 	}
 
 	// getters y setters
@@ -72,10 +71,14 @@ public abstract class Entrada {
 	public void setCosto(double costo) {
 		this.costo = costo;
 	}
+	
+	 ///public abstract double devolverCosto(double dato);
 
 	@Override
 	public String toString() {
 		return "Entrada id=" + id + ", nombre=" + nombre + ", fecha=" + fecha + ", duracion=" + duracion + ", costo="+ costo;
 	}
+
+	
 
 }

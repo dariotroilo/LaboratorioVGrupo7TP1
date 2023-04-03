@@ -1,36 +1,37 @@
 package dominio;
 
-public class EntradaDeporte extends Entrada{
+public class EntradaDeporte extends Entrada implements ICosto{
 	
 	private String deporte;
 	private final static double ValorFutbol = 300;
 	private final static double ValorRugby = 450;
 	private final static double ValorHockey = 380;
+	private char tipo;
 	private boolean IsNacional ;
 	private double valor = 0; 
 	private static double RecargoInt = 1.3;
 	
 	
-	//Constructors
 	public EntradaDeporte () {
 		super();
 		this.IsNacional = false;
-		this.deporte = null;;
+		this.deporte = null;
 	}
 	
-	public EntradaDeporte(String nombre, Fecha fecha, int duracion, String deporte, boolean nacional) {
-		
+	public EntradaDeporte(String nombre, Fecha fecha, int duracion, String deporte, boolean nacional, char Tipo) {
+		this.tipo = Tipo;
 		if (existeDeporte(deporte)) {
 			this.deporte = deporte.toUpperCase();
 		} 
 		else 
 		{
-			this.deporte = null;
+			System.out.println("No existe el deporte indicado");
+			System.exit(0);
 		}
 
 		if (nacional) {
 			RecargoInt = 1;
-		} 
+		}
 		
 		switch(deporte) {
 		 case "FUTBOL": valor=ValorFutbol * RecargoInt;
@@ -38,8 +39,6 @@ public class EntradaDeporte extends Entrada{
 		 case "RUGBY": valor=ValorRugby * RecargoInt;
 		 break;
 		 case "HOCKEY": valor=ValorRugby * RecargoInt;
-		 break;
-		 default: valor = 0;
 		 break;
 		}
 		
@@ -56,45 +55,34 @@ public class EntradaDeporte extends Entrada{
 		}
 	}
 	
-	
-	
-	//Getters and Setters
-	public String getDeporte() {
-		return deporte;
-	}
-
-	public void setDeporte(String deporte) {
-		this.deporte = deporte;
-	}
-
-	public double getValor() {
-		return valor;
-	}
-
-	public void setValor(double valor) {
-		this.valor = valor;
-	}
-
-	public static double getValorfutbol() {
-		return ValorFutbol;
-	}
-
-	public static double getValorrugby() {
-		return ValorRugby;
-	}
-
-	public static double getValorhockey() {
-		return ValorHockey;
-	}
-
-	public boolean isIsNacional() {
+	public boolean Isnacional() {
 		return IsNacional;
 	}
 
-	public static void setRecargoInt(double recargoInt) {
-		RecargoInt = recargoInt;
+	public void setIsNacional(boolean nacional) {
+		this.IsNacional = nacional;
+	}  
+	
+	public static double getValorFutbol() {
+		return ValorFutbol;
 	}
-
+	
+	public static double getValorRugby() {
+		return ValorRugby;
+	}
+	
+	public static double getValorHockey() {
+		return ValorHockey;
+	}
+	
+	public static double getRecargoInt() {
+		return RecargoInt;
+	}
+	
+	public void setvalor(double valor) {
+		this.valor = valor;
+	}
+	
 	public boolean existeDeporte(String deporte) {
 		String deportes[] = {"Futbol","Hockey","Rugby"};
 
@@ -104,6 +92,19 @@ public class EntradaDeporte extends Entrada{
 		    }
 		}
 		return false;
+	}
+
+	@Override
+	public double devolverCosto(double dato) {
+		if (tipo == 'F') {
+			return ValorFutbol;
+		}
+		else if(tipo == 'R'){
+			return ValorRugby;
+		}
+		else {
+			return ValorHockey;
+		}
 	}
 	
 	

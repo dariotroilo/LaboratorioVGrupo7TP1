@@ -2,19 +2,19 @@ package dominio;
 
 import java.util.Arrays;
 
-public class EntradaTeatro extends Entrada{
+public class EntradaTeatro extends Entrada implements ICosto {
 	
 	@Override
 	public String toString() {
 		return "EntradaTeatro [genero=" + genero + ", artistas=" + Arrays.toString(artistas) + "]";
 	}
 
-	private final static double valorEntradaVip = 1350.50;
+	private final static double valorEntrada = 1350.50;
 	private String genero;
 	private String artistas[];
 	
-	public EntradaTeatro(String nombre, String genero, String artistas[], Fecha fecha, int duracion) {
-		super(nombre, fecha, duracion, getValorEntradaVip());
+	public EntradaTeatro(String nombre, String genero, String artistas[], Fecha fecha, int duracion, char Tipo) {
+		super(nombre, fecha, duracion);
 		this.artistas = artistas;
 		
 		if (validarArtistas(artistas)) {
@@ -51,11 +51,7 @@ public class EntradaTeatro extends Entrada{
 
 	public void setArtistas(String[] artistas) {
 		this.artistas = artistas;
-	}
-
-	public static double getValorEntradaVip() {
-		return valorEntradaVip;
-	}
+	} 
 	
 	public boolean validaGenero(String nombreGenero) {
 		boolean existe = existeGenero(nombreGenero) != -1 ? true : false;
@@ -71,6 +67,13 @@ public class EntradaTeatro extends Entrada{
 		    }
 		}
 		return -1;
+	}
+
+
+	@Override
+	public double devolverCosto(double dato) {
+
+		return valorEntrada;
 	}
 	
 }
