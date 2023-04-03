@@ -25,8 +25,7 @@ public class EntradaDeporte extends Entrada{
 		} 
 		else 
 		{
-			System.out.println("No existe el deporte indicado");
-			System.exit(0);
+			this.deporte = null;
 		}
 
 		if (nacional) {
@@ -40,13 +39,21 @@ public class EntradaDeporte extends Entrada{
 		 break;
 		 case "HOCKEY": valor=ValorRugby * RecargoInt;
 		 break;
+		 default: valor = 0;
+		 break;
 		}
 		
 	}
 	
 	@Override
 	public String toString() {
-		return "EntradaDeporte [deporte=" + deporte + ", IsNacional=" + IsNacional + ", valor=" + valor + "]";
+		if (deporte != null) {
+			return "EntradaDeporte [deporte=" + deporte + ", IsNacional=" + IsNacional + ", valor=" + valor + "]";
+		}
+		else
+		{
+			return "EntradaDeporte: El deporte indicado no existe";
+		}
 	}
 	
 	
