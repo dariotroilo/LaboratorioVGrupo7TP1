@@ -19,6 +19,7 @@ public class EntradaDeporte extends Entrada implements ICosto{
 	
 	public EntradaDeporte(String nombre, Fecha fecha, int duracion, boolean nacional, char Tipo) {
 		this.tipo = Tipo;
+		this.IsNacional = nacional;
 		if (existeDeporte(Tipo) != '\0') {
 			this.tipo = Tipo;
 		} 
@@ -27,7 +28,11 @@ public class EntradaDeporte extends Entrada implements ICosto{
 			System.out.println("No existe el deporte indicado");
 		}
 
-		if (nacional) { RecargoInt = 1;	}
+		if (nacional) 
+			{ RecargoInt = 1;	}
+		else
+			{ RecargoInt = 1.3;	}
+		
 		this.costo=devolverCosto(Tipo);
 	}
 	
@@ -42,7 +47,7 @@ public class EntradaDeporte extends Entrada implements ICosto{
 		}
 	}
 	
-	public boolean Isnacional() {
+	public boolean IsNacional() {
 		return IsNacional;
 	}
 
@@ -81,13 +86,13 @@ public class EntradaDeporte extends Entrada implements ICosto{
 	@Override
 	public double devolverCosto(double dato) {
 		if (tipo == 'F') {
-			return ValorFutbol * RecargoInt;
+			return (ValorFutbol * RecargoInt);
 		}
 		else if(tipo == 'R'){
-			return ValorRugby * RecargoInt;
+			return (ValorRugby * RecargoInt);
 		}
 		else if(tipo == 'H'){
-			return ValorHockey * RecargoInt;
+			return (ValorHockey * RecargoInt);
 		}
 		else {
 			return 0;
