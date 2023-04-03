@@ -2,7 +2,6 @@ package dominio;
 
 public class EntradaDeporte extends Entrada implements ICosto{
 	
-	private String deporte;
 	private final static double ValorFutbol = 300;
 	private final static double ValorRugby = 450;
 	private final static double ValorHockey = 380;
@@ -15,32 +14,27 @@ public class EntradaDeporte extends Entrada implements ICosto{
 	public EntradaDeporte () {
 		super();
 		this.IsNacional = false;
-		this.deporte = null;
+		this.tipo = '\0';
 	}
 	
-	public EntradaDeporte(String nombre, Fecha fecha, int duracion, String deporte, boolean nacional, char Tipo) {
+	public EntradaDeporte(String nombre, Fecha fecha, int duracion, boolean nacional, char Tipo) {
 		this.tipo = Tipo;
-		if (existeDeporte(deporte)) {
-			this.deporte = deporte.toUpperCase();
+		if (existeDeporte(Tipo) != '\0') {
+			this.tipo = Tipo;
 		} 
 		else 
 		{
 			System.out.println("No existe el deporte indicado");
-			System.exit(0);
 		}
 
-		if (nacional) {
-			RecargoInt = 1;
-		}
+		if (nacional) { RecargoInt = 1;	}
 		this.costo=devolverCosto(Tipo);
-		
-		
 	}
 	
 	@Override
 	public String toString() {
-		if (deporte != null) {
-			return "EntradaDeporte [deporte=" + deporte + ", IsNacional=" + IsNacional + ", Costo=" + costo + "]";
+		if (tipo != '\0' || costo==0 ) {
+			return "EntradaDeporte [IsNacional=" + IsNacional + ", Costo=" + costo + "]";
 		}
 		else
 		{
@@ -73,15 +67,15 @@ public class EntradaDeporte extends Entrada implements ICosto{
 	}
 	
 	
-	public boolean existeDeporte(String deporte) {
-		String deportes[] = {"Futbol","Hockey","Rugby"};
+	public char existeDeporte(char tipo) {
+		char deportes[] = {'F','H','R'};
 
 		for (int i = 0; i < deportes.length ; i++) {
-			if (deporte.toUpperCase().equals(deportes[i].toUpperCase())) {
-		      return true;
+			if (tipo==(deportes[i])) {
+		      return tipo;
 		    }
 		}
-		return false;
+		return '0';
 	}
 
 	@Override
@@ -92,8 +86,11 @@ public class EntradaDeporte extends Entrada implements ICosto{
 		else if(tipo == 'R'){
 			return ValorRugby * RecargoInt;
 		}
-		else {
+		else if(tipo == 'H'){
 			return ValorHockey * RecargoInt;
+		}
+		else {
+			return 0;
 		}
 	}
 	
