@@ -4,7 +4,7 @@ package dominio;
 public class EntradaInfantil extends Entrada implements ICosto {
 	private final double mayores = 500;
 	private final double menores = 250;
-
+private double costo;
 	
 	private boolean contieneSouvenir;
 	
@@ -18,6 +18,7 @@ public class EntradaInfantil extends Entrada implements ICosto {
 	public EntradaInfantil (String nombre, Fecha fecha, int duracion, int edad, boolean contieneSouvenir) {
 		super(nombre, fecha, duracion);
 		this.contieneSouvenir = contieneSouvenir;
+		this.costo= devolverCosto(edad); 
 	}
 	
 	
@@ -34,7 +35,7 @@ public class EntradaInfantil extends Entrada implements ICosto {
 
 	@Override
 	public String toString() {
-		return "contieneSouvenir=" + (contieneSouvenir ? "Si, " : "No, ") + super.toString() + "";
+		return "contieneSouvenir=" + (contieneSouvenir ? "Si, " : "No, ") + super.toString() + ", Costo: "+ costo;
 	}
 
 	@Override

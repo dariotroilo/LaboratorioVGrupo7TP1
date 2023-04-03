@@ -10,12 +10,13 @@ public class EntradaRecital extends Entrada implements ICosto {
 	private String banda;
 	private String bandasSoporte[];
 	private String genero;
+	private double costo;
 	
-	public EntradaRecital(String banda,String[] bandasSoporte, String genero, Fecha fecha, int duracion, char Tipo) {
-		super("Entrada recital para " + banda, fecha, 4);
+	public EntradaRecital(String banda, String[] bandasSoporte, String genero, Fecha fecha, int duracion, char Tipo) {
+		super("Entrada recital para " + banda, fecha, duracion);
 		this.banda = banda;
 		this.tipo = Tipo;
-		
+		this.costo = devolverCosto(Tipo);
 		if (validaBandasSoporte(bandasSoporte)) {
 			setBandasSoporte(bandasSoporte);
 		} else {
@@ -83,15 +84,8 @@ public class EntradaRecital extends Entrada implements ICosto {
 		return -1;
 	}
 	
-	public void compraEntradas(double entradasVip, double entradasGeneral) {
-		double costoVip = entradasVip * this.valorEntradaVip;
-		double costoGeneral = entradasGeneral * this.valorEntradaGeneral;
-		
-		setCosto(costoVip + costoGeneral);
-	}
-	
 	public String toString() {
-		return "banda=" + getBanda() + ", banda/s soporte=" + getBandasSoporte() + ", genero=" + getGenero();
+		return "banda=" + getBanda() + ", banda/s soporte=" + getBandasSoporte() + ", genero=" + getGenero()+ ", Costo: " + costo;
 	}
 	
 	public String getInfoEntrada() {

@@ -8,7 +8,7 @@ public abstract class Entrada {
 	private String nombre;
 	private Fecha fecha;
 	private int duracion;
-	private double costo;
+
 
 	// constructor
 	public Entrada() {
@@ -19,7 +19,7 @@ public abstract class Entrada {
 		id = cont;
 		nombre = "Sin nombre";
 		duracion = 0;
-		costo = 0;
+		
 	}
 	
    //constructor con parámetros
@@ -64,19 +64,13 @@ public abstract class Entrada {
 		this.duracion = duracion;
 	}
 
-	public double getCosto() {
-		return costo;
-	}
 
-	public void setCosto(double costo) {
-		this.costo = costo;
-	}
 	
-	 ///public abstract double devolverCosto(double dato);
+	 /// abstract double devolverCosto(double dato);
 
 	@Override
 	public String toString() {
-		return "Entrada id=" + id + ", nombre=" + nombre + ", fecha=" + fecha + ", duracion=" + duracion + ", costo="+ costo;
+		return "Entrada id=" + id + ", nombre=" + nombre + ", fecha=" + fecha + ", duracion=" + duracion ;
 	}
 
 	

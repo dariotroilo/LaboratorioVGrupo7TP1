@@ -8,7 +8,7 @@ public class EntradaDeporte extends Entrada implements ICosto{
 	private final static double ValorHockey = 380;
 	private char tipo;
 	private boolean IsNacional ;
-	private double valor = 0; 
+	private double costo; 
 	private static double RecargoInt = 1.3;
 	
 	
@@ -32,22 +32,15 @@ public class EntradaDeporte extends Entrada implements ICosto{
 		if (nacional) {
 			RecargoInt = 1;
 		}
+		this.costo=devolverCosto(Tipo);
 		
-		switch(deporte) {
-		 case "FUTBOL": valor=ValorFutbol * RecargoInt;
-		 break;
-		 case "RUGBY": valor=ValorRugby * RecargoInt;
-		 break;
-		 case "HOCKEY": valor=ValorRugby * RecargoInt;
-		 break;
-		}
 		
 	}
 	
 	@Override
 	public String toString() {
 		if (deporte != null) {
-			return "EntradaDeporte [deporte=" + deporte + ", IsNacional=" + IsNacional + ", valor=" + valor + "]";
+			return "EntradaDeporte [deporte=" + deporte + ", IsNacional=" + IsNacional + ", Costo=" + costo + "]";
 		}
 		else
 		{
@@ -79,9 +72,6 @@ public class EntradaDeporte extends Entrada implements ICosto{
 		return RecargoInt;
 	}
 	
-	public void setvalor(double valor) {
-		this.valor = valor;
-	}
 	
 	public boolean existeDeporte(String deporte) {
 		String deportes[] = {"Futbol","Hockey","Rugby"};
@@ -97,13 +87,13 @@ public class EntradaDeporte extends Entrada implements ICosto{
 	@Override
 	public double devolverCosto(double dato) {
 		if (tipo == 'F') {
-			return ValorFutbol;
+			return ValorFutbol * RecargoInt;
 		}
 		else if(tipo == 'R'){
-			return ValorRugby;
+			return ValorRugby * RecargoInt;
 		}
 		else {
-			return ValorHockey;
+			return ValorHockey * RecargoInt;
 		}
 	}
 	

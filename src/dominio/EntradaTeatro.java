@@ -6,16 +6,17 @@ public class EntradaTeatro extends Entrada implements ICosto {
 	
 	@Override
 	public String toString() {
-		return "EntradaTeatro [genero=" + genero + ", artistas=" + Arrays.toString(artistas) + "]";
+		return "EntradaTeatro [genero=" + genero + ", artistas=" + Arrays.toString(artistas) +" Costo: "+costo+ "]";
 	}
 
 	private final static double valorEntrada = 1350.50;
 	private String genero;
 	private String artistas[];
+	private double costo;
 	
 	public EntradaTeatro(String nombre, String genero, String artistas[], Fecha fecha, int duracion, char Tipo) {
 		super(nombre, fecha, duracion);
-		this.artistas = artistas;
+		this.costo = devolverCosto(Tipo);
 		
 		if (validarArtistas(artistas)) {
 			setArtistas(artistas);
@@ -23,9 +24,11 @@ public class EntradaTeatro extends Entrada implements ICosto {
 			System.out.println("Se excedió el numero de artistas principales");
 			System.exit(0);
 		}
+		
 		if (validaGenero(genero)) {
 			this.genero = genero;
-		} else {
+		}
+		else {
 			System.out.println("Género no existente para la entrada de teatro");
 			System.exit(0);
 		}
